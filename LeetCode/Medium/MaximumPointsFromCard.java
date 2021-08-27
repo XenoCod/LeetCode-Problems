@@ -1,5 +1,6 @@
 
 public class MaximumPointsFromCard {
+	//Sliding windows variation ....Google coding ques
 	static int getMaxPoints(int nums[], int k) {
 		int sum=0, n=nums.length;
 		for(int i=0; i<k; i++) sum+=nums[i];
