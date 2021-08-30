@@ -10,7 +10,6 @@ public class GroupAnagrams {
 			char ch[]= new char[26];
 			for(char c:s.toCharArray()) ch[c - 'a']++;
 			String encodedKey= String.valueOf(ch);
-			System.out.println(encodedKey);
 			if(!map.containsKey(encodedKey)) map.put(encodedKey, new ArrayList<>());
 			map.get(encodedKey).add(s);
 			
