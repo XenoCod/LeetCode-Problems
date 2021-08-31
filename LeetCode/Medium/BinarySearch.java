@@ -41,6 +41,20 @@ public class BinarySearch {
 		return res;
 	}
 	
+	private int floor(int nums[], int target) {
+		int low=0, high=nums.length,res=-1;
+		while(low <= high) {
+			int mid= low +((high - low) >> 1);
+			if(nums[mid] == target) return nums[mid];
+			else if(nums[mid] > target) high= mid -1;
+			else {
+				res=nums[mid];
+				low= mid+1;
+			}
+		}
+		return res;
+	}
+	
 	
 	public static void main(String[] args) {
 		int nums[]= {2,4,10,10,10,18,20};
@@ -49,6 +63,7 @@ public class BinarySearch {
 		System.out.println(bs.solve(nums, 10));
 		
 		System.out.println(bs.ceil(nums, 11)  );
+		System.out.println(bs.floor(nums, 3));
 	}
 
 }
