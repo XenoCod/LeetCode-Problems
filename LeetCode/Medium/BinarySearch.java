@@ -57,38 +57,50 @@ public class BinarySearch {
 	
 	
 	private int firstOcc(int nums[], int target) {
-		int low=0, high=1,res=-1;
-		while(low <= high ) {
-			if(nums[low] <= target && nums[high] >= target) {
-				int mid= low + ((high - low) >> 1);
-				if(nums[mid] == target) {
-					res=mid;
-					high= mid-1;
+		
+		//We are givem an infinite binary array and we have to find the first occurence of the target
+		try {
+				int low=0, high=1,res=-1;
+				while(low <= high ) {
+					if(nums[low] <= target && nums[high] >= target) {
+						return help(nums, target, true);
+						
+					}
+					else {
+						int temp= high;
+						high=2*high;
+						low= temp;
+						
+					}
 				}
-				else if(nums[mid] > target) high= mid-1;
-				else low= mid+1;
-				
-			}
-			else {
-				int temp= high;
-				high=2*high;
-				low= temp;
-				
-			}
+				return res;
 		}
-		return res;
+		catch(ArrayIndexOutOfBoundsException e) {
+			System.out.println("Not in Array");
+			return -1;
+		}
+	}
+	
+	
+	
+	//Minnummum absolute diff of the key
+	private int absDif(int absDiff[], int key) {
+		return  key - floor(absDiff, key) ;
+		//Minnumm abs diff will always the differnece between the prevoius smaller element and the current key
 	}
 	
 	public static void main(String[] args) {
 		int nums[]= {2,4,10,10,10,18,20};
-		int infiniteNums[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+		int infiniteNums[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+		int absDiff[]= {1,3,8,10,15};
 		
 		BinarySearch bs= new BinarySearch();
 		System.out.println(bs.solve(nums, 10));
 		
 		System.out.println(bs.ceil(nums, 11)  );
 		System.out.println(bs.floor(nums, 3));
-		System.out.println(bs.firstOcc(infiniteNums,1));
+		System.out.println(bs.firstOcc(infiniteNums,2));
+		System.out.println(bs.absDif(absDiff, 12));
 	}
 
 }
