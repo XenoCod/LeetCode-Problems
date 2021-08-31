@@ -89,18 +89,61 @@ public class BinarySearch {
 		//Minnumm abs diff will always the differnece between the prevoius smaller element and the current key
 	}
 	
+	//Find peak element in biottonic array
+	private int findPeak(int nums[]) {
+		if(nums.length==1) return 0;
+		if(nums[0] > nums[1]) return 0;
+		int n=nums.length;
+		if(nums[n-1] >nums[n-2]) return n-1;
+		//checking for the remaining array
+		int low=1, high=n-2;
+		while(low <=high) {
+			int mid = low + ((high - low) >> 1);
+			if(nums[mid] > nums[mid -1] && nums[mid] >nums[mid +1]) return mid;
+			else if(nums[mid-1] > nums[mid]) high= mid-1;
+			else low= mid+1;
+		}
+		return -1;
+	}
+	
+	//SImple binary search
+	private int bSearch(int nums[], int target, int l, int h) {
+		int low=l, high=h;
+		while(low <= high) {
+			int mid= low + ((high - low ) >> 1);
+			if(nums[mid] == target) return mid;
+			else if(nums[mid] < target) high= mid-1;
+			else low= mid+1;
+		}
+		return -1;
+	}
+	
+	
+	private int biotonicSearch(int nums[], int target) {
+		int index=findPeak(nums);
+		int first=bSearch(nums, target, 0, index-1);
+		int second= bSearch(nums, target, index, nums.length-1);
+		System.out.println(first+ " "+second);
+		return (first != -1)?first: second;
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		int nums[]= {2,4,10,10,10,18,20};
 		int infiniteNums[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 		int absDiff[]= {1,3,8,10,15};
+		int bio[]= {1,3,8,12,4,2};
 		
 		BinarySearch bs= new BinarySearch();
-		System.out.println(bs.solve(nums, 10));
 		
+		
+		System.out.println(bs.solve(nums, 10));
 		System.out.println(bs.ceil(nums, 11)  );
 		System.out.println(bs.floor(nums, 3));
 		System.out.println(bs.firstOcc(infiniteNums,2));
 		System.out.println(bs.absDif(absDiff, 12));
+		System.out.println(bs.biotonicSearch(bio, 2 ));
 	}
 
 }
