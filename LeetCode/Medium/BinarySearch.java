@@ -4,7 +4,7 @@ public class BinarySearch {
 		
 		int first= help(nums, target, true);
 		int last= help(nums, target, false);
-		System.out.println(first+ " "+ last);
+//		System.out.println(first+ " "+ last);
 		return last - first +1;
 	}
 	
@@ -18,7 +18,7 @@ public class BinarySearch {
 				if(nums[mid] == target) {
 						count =mid;
 						if(first) high=mid-1;
-						else low= mid+1;
+						else low= mid+1; 
 				}
 				else if(nums[mid] > target) high=mid - 1;
 				else low =mid +1;
@@ -27,12 +27,28 @@ public class BinarySearch {
 		
 	}
 	
+	private int ceil(int nums[], int target) {
+		int low=0, high=nums.length, res=-1;
+		while(low <= high) {
+			int mid= low + ((high - low) >> 1);
+			if(nums[mid] == target) return mid;
+			else if(nums[mid] > target) {
+				res=nums[mid];
+				high=mid - 1;
+			}
+			else low= mid+1;
+		}
+		return res;
+	}
+	
 	
 	public static void main(String[] args) {
 		int nums[]= {2,4,10,10,10,18,20};
 		
 		BinarySearch bs= new BinarySearch();
 		System.out.println(bs.solve(nums, 10));
+		
+		System.out.println(bs.ceil(nums, 11)  );
 	}
 
 }
