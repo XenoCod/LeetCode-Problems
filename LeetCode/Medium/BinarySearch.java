@@ -56,14 +56,39 @@ public class BinarySearch {
 	}
 	
 	
+	private int firstOcc(int nums[], int target) {
+		int low=0, high=1,res=-1;
+		while(low <= high ) {
+			if(nums[low] <= target && nums[high] >= target) {
+				int mid= low + ((high - low) >> 1);
+				if(nums[mid] == target) {
+					res=mid;
+					high= mid-1;
+				}
+				else if(nums[mid] > target) high= mid-1;
+				else low= mid+1;
+				
+			}
+			else {
+				int temp= high;
+				high=2*high;
+				low= temp;
+				
+			}
+		}
+		return res;
+	}
+	
 	public static void main(String[] args) {
 		int nums[]= {2,4,10,10,10,18,20};
+		int infiniteNums[]= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 		
 		BinarySearch bs= new BinarySearch();
 		System.out.println(bs.solve(nums, 10));
 		
 		System.out.println(bs.ceil(nums, 11)  );
 		System.out.println(bs.floor(nums, 3));
+		System.out.println(bs.firstOcc(infiniteNums,1));
 	}
 
 }
