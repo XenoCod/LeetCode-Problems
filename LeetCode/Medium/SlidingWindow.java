@@ -96,6 +96,25 @@ public class SlidingWindow {
 	}
 	
 	
+	private void smallestSubArrayProduct(int nums[], int k) {
+		int count=0;
+		
+		int start=0, end=0;
+		long prod=1;
+		while(end < nums.length) {
+			prod*= nums[end];
+			while(start <= end && prod >= k  ) {
+					prod= prod / nums[start];
+					start++;
+				}
+				count+= end - start +1;
+				end++;
+			
+		}
+		System.out.println( "ans =>"+count);
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		
@@ -113,10 +132,38 @@ public class SlidingWindow {
 		//Count occurences of anagrams
 		String s1="abcjhjfbcaklsdjljnscablskjdacb";
 		String s2="abc";
-		obj.countAnagrams(s1, s2);
+//		obj.countAnagrams(s1, s2);
 		
 		
 //		System.out.println(obj.findMaxSubArray(nums, size));
+		
+		
+		//Variable Sliding window
+		
+		/*
+		 * while(end < size){
+		 * calculations
+		 * if(condition < size) end++;
+		 
+		 
+		 * else if(condtion == size){
+		 * make an answer from the calculation
+		 * end++;
+		 * }
+		 * 
+		 * else if(condition > k){
+		 * remove from the start untol condition or sum < k
+		 * while(condtion >k){
+		 * condition-= nums[start];
+		 * start++;
+		 * }
+		 * end++;
+		 * }
+		 * */
+		//Find the subarray product less than k
+		int arr[]= {5,7,2,4,1,8,2,7,5};
+		obj.smallestSubArrayProduct(arr, 16);
+		
 		
 	}
 
