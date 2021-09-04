@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SlidingWindow {
 	
@@ -115,6 +116,67 @@ public class SlidingWindow {
 	}
 	
 	
+	void longestUniqueSubstring(String s, int k) {
+		Map<Character, Integer> map= new HashMap<>();
+		int start=0, end=0,res= -1;
+		while(end < s.length()) {
+			int counter= map.size();
+			map.put(s.charAt(end), map.getOrDefault(s.charAt(end), 0) + 1);
+			if(counter < k ) {
+				end++;
+			}
+			else if(counter ==  k) {
+				res= Math.max(end - start + 1, res);
+				end++;
+			}
+			else if(counter > k) {
+				while(counter > k) {
+					map.put(s.charAt(start), map.get(s.charAt(start))-1);
+					if(map.get(s.charAt(start)) == 0)
+						counter--;
+					start++;
+				}
+				end++;
+			}
+			
+		}
+		System.out.println(res);
+	}
+	
+	
+	
+//	longest Substring With At most Two Distinct Characters
+	private void longestSubstringWithAtmostTwoDistinctCharacters(String s) {
+//		abaacbebebe
+		int start=0, end=0, res=-1;
+		HashMap<Character, Integer> map= new HashMap<>();
+		while(end <s.length()) {
+			int counter =map.size();
+			map.put(s.charAt(end), map.getOrDefault(s.charAt(end), 0) + 1);
+			if(counter < 2) {
+				end++;
+			}
+			else if(counter== 2) {
+				res= Math.max(end - start + 1, res);
+				end++;
+			}
+			else if(counter > 2) {
+				while(counter > 2) {
+					map.put(s.charAt(start), map.get(s.charAt(start))-1);
+					if(map.get(s.charAt(start)) ==0)
+						counter--;
+					start++;
+					
+				}
+				end++;
+			}
+			
+		}
+		System.out.println(res);
+		
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		
@@ -162,7 +224,14 @@ public class SlidingWindow {
 		 * */
 		//Find the subarray product less than k
 		int arr[]= {5,7,2,4,1,8,2,7,5};
-		obj.smallestSubArrayProduct(arr, 16);
+//		obj.smallestSubArrayProduct(arr, 16);
+		
+		//Longest SUbstring with k unique character
+		String s="abaacbebebe";
+		obj.longestUniqueSubstring(s, 3);
+		
+		String str="abaccab";
+		obj.longestSubstringWithAtmostTwoDistinctCharacters(str);
 		
 		
 	}
