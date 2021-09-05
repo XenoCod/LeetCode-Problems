@@ -77,6 +77,30 @@ public class Recursion {
 		return;
 	}
 	
+	
+	
+	//Reverse a stack
+	private void reverse(Stack<Integer> st) {
+		if(st.size() == 1) {
+			return;
+		}
+		
+		int temp= st.pop();
+		reverse(st);
+		insertstack(st, temp);
+	}
+	
+	private void insertstack(Stack<Integer> st, int t) {
+		if(st.size() == 0) {
+			st.push(t);
+			return;
+		}
+		
+		int val= st.pop();
+		insertstack(st, t);
+		st.push(val);
+	}
+	
 
 	
 	
@@ -98,7 +122,12 @@ public class Recursion {
 		
 		//Delete middle element in the stack
 		int mid=(int) Math.ceil(st.size() * 1.0 / 2);
-		obj.deleteMiddle(st, mid);
+//		obj.deleteMiddle(st, mid);
+//		obj.printStack(st);
+		
+		
+		//Reverse a Stack
+		obj.reverse(st);
 		obj.printStack(st);
 		
 	}
