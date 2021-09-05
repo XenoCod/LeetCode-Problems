@@ -64,6 +64,19 @@ public class Recursion {
 		while(!st.isEmpty()) System.out.print(st.pop()+" ");
 	}
 	
+	
+	//Delete middle element in Stack
+	private void deleteMiddle(Stack<Integer> st, int k) {
+		if( k ==  1) {
+			st.pop();
+			return;
+		}
+		int temp=st.pop();
+		deleteMiddle(st, k-1);
+		st.push(temp);
+		return;
+	}
+	
 
 	
 	
@@ -79,6 +92,13 @@ public class Recursion {
 		Stack<Integer> st= new Stack<>();
 		obj.builtStack(st, nums);
 		obj.sortStack(st);
+//		obj.printStack(st);
+		
+		
+		
+		//Delete middle element in the stack
+		int mid=(int) Math.ceil(st.size() * 1.0 / 2);
+		obj.deleteMiddle(st, mid);
 		obj.printStack(st);
 		
 	}
