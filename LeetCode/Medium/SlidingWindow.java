@@ -177,6 +177,51 @@ public class SlidingWindow {
 	}
 	
 	
+	void minWindowSubstring(String s, String t) {
+		HashMap<Character, Integer> map= new HashMap<>();
+		int start=0, end=0, minLeft=0, minRight=0, minLen=Integer.MAX_VALUE;
+		boolean flag=false;
+		
+		for(char c:t.toCharArray()) map.put(c, map.getOrDefault(c, 0) + 1);
+		
+		int counter = map.size();
+		
+		while(end < s.length()) {
+			char ch= s.charAt(end);
+			if(map.containsKey(ch)) {
+				map.put(ch, map.get(ch) - 1);
+				if(map.get(ch) == 0)
+					counter--;
+			}
+			while(counter == 0) {
+				flag=true;
+				char c=s.charAt(start);
+				
+					
+					
+					int currLen= end - start +1;
+					if(currLen <= minLen) {
+						minLeft=start;
+						minRight=end;
+						minLen= currLen;
+					}
+					
+					if(map.containsKey(c)) {
+						map.put(c, map.get(c) + 1);
+					
+					
+					if(map.get(c) > 0)
+						counter++;
+				}
+				start++;
+			}
+			end++;
+		}
+		System.out.println(flag? s.substring(minLeft, minRight + 1):"");
+		
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		
@@ -232,6 +277,12 @@ public class SlidingWindow {
 		
 		String str="abaccab";
 		obj.longestSubstringWithAtmostTwoDistinctCharacters(str);
+		
+		
+		//Find the min window substring 
+		String str1="ADOBECODEBANC";
+		String str2="ABC";
+		obj.minWindowSubstring(str1, str2);
 		
 		
 	}
