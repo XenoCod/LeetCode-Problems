@@ -35,12 +35,24 @@ public class Recursion {
 	
 	// Sort a stack
 	
-//	private void sortStack(Stack<Integer> st) {
-//		if(st.isEmpty()) return;
-//		sortStack(st.pop());
-//		insert
-//		printStack(st);
-//	}
+	 private void sortStack(Stack<Integer> st) {
+		 if(st.size() ==1) return;
+		 int temp= st.pop();
+		 sortStack(st);
+		 insertStack(st, temp);
+	 }
+	 
+	 
+	 private void insertStack(Stack<Integer> s, int temp ) {
+		 if(s.size()==0||s.peek()<=temp) {
+				s.push(temp);
+				return;
+			}
+			int val = s.peek();
+			s.pop();
+			insertStack(s,temp);
+			s.push(val);
+	 }
 	
 	
 	
@@ -66,6 +78,7 @@ public class Recursion {
 		//Sort a stack
 		Stack<Integer> st= new Stack<>();
 		obj.builtStack(st, nums);
+		obj.sortStack(st);
 		obj.printStack(st);
 		
 	}
