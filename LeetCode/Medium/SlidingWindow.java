@@ -222,6 +222,36 @@ public class SlidingWindow {
 	}
 	
 	
+	///Grumpy book store
+	private void bookStore(int customers[], int grumpy[], int minutes) {
+		int start=0, end=0, sum=0, res=-1, count=0;
+        while(end < customers.length){
+            if(count < minutes ){
+                sum+=customers[end];
+                count+=grumpy[end];
+                end++;
+            }
+            else if(count == minutes){
+            	System.out.println("count"+count);
+            	System.out.println("res"+res);
+                res= Math.max(res, sum);
+                while(end > start){
+                    count-=grumpy[start];
+                    sum-=customers[start];
+                    System.out.println("sum"+sum);
+                    start++;
+                }
+                end++;
+                
+            }
+            System.out.println("cust"+customers[end-1]);
+//            end++;
+        }
+//        return res;
+        System.out.println(res);
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		
@@ -273,16 +303,24 @@ public class SlidingWindow {
 		
 		//Longest SUbstring with k unique character
 		String s="abaacbebebe";
-		obj.longestUniqueSubstring(s, 3);
+//		obj.longestUniqueSubstring(s, 3);
 		
 		String str="abaccab";
-		obj.longestSubstringWithAtmostTwoDistinctCharacters(str);
+//		obj.longestSubstringWithAtmostTwoDistinctCharacters(str);
 		
 		
 		//Find the min window substring 
 		String str1="ADOBECODEBANC";
 		String str2="ABC";
-		obj.minWindowSubstring(str1, str2);
+//		obj.minWindowSubstring(str1, str2);
+		
+		
+		//Grumpy book store owner
+		int cust[]= {1,0,1,2,1,1,7,5};
+		int grumpy[]= {0,1,0,1,0,1,0,1};
+		int mins=3;
+		obj.bookStore(cust, grumpy, mins);
+		
 		
 		
 	}

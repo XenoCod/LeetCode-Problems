@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Recursion {
@@ -101,6 +102,23 @@ public class Recursion {
 		st.push(val);
 	}
 	
+	
+	//Print Subsets of String
+	private void printSubsets(String input, String output) {
+		if(input.length()==0){
+            System.out.print(output+" ");
+            return;
+        }
+        String out1 = output;
+        String out2 = output;
+        out2 += input.charAt(0);
+        input = input.substring(1);
+
+        printSubsets(input,out1);
+        printSubsets(input,out2);
+	}
+	
+	
 
 	
 	
@@ -128,7 +146,12 @@ public class Recursion {
 		
 		//Reverse a Stack
 		obj.reverse(st);
-		obj.printStack(st);
+//		obj.printStack(st);
+		
+		
+		//Print the subsets/ subsequneces of a string
+		
+		obj.printSubsets("abcd","");
 		
 	}
 
