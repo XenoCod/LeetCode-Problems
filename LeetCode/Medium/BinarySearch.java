@@ -142,8 +142,8 @@ public class BinarySearch {
                 else                                          low=mid+1;
                 
             }
-            else{
-                if(nums[mid]<= target && target<= nums[high]) low= mid+1;
+            else if(nums[mid] < nums[high]){
+                if(nums[mid]< target && target<= nums[high]) low= mid+1;
                 else                                          high=mid-1;
             }
         }
