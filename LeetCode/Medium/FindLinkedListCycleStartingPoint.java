@@ -9,7 +9,7 @@ class ListNode {
 
 
 public class FindLinkedListCycleStartingPoint {
-    static ListNode getCycleNode(ListNode head){
+     ListNode getCycleNode(ListNode head){
         ListNode temp= head, slow= head, fast= head;
         while(fast.next != null && fast!= null){
             slow=slow.next;
@@ -31,6 +31,7 @@ public class FindLinkedListCycleStartingPoint {
         cycle.next= new ListNode(8);
         cycle.next.next= new ListNode(9);
         cycle.next.next.next=cycle;
-        System.out.println(getCycleNode(head).val);
+        FindLinkedListCycleStartingPoint obj= new FindLinkedListCycleStartingPoint();
+        System.out.println(obj.getCycleNode(head).val);
     }
 }
